@@ -2,6 +2,7 @@ package com.springproject.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
@@ -45,11 +46,7 @@ class PersonServiceTest extends PersonBase {
 	@DisplayName("Find all CRUD: Exception")
 	void findAllCatchTest() {
 		when(genericRepository.findAll()).thenThrow(new InvalidGenericException(""));
-		try {
-			personService.findAll();
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
+		assertThrows(InvalidGenericException.class, () -> personService.findAll());
 	}
 
 	@Test
@@ -63,12 +60,7 @@ class PersonServiceTest extends PersonBase {
 	@Test
 	@DisplayName("Save CRUD: Exception")
 	void saveCatchTest() {
-		when(genericRepository.save(any())).thenThrow(new InvalidGenericException(""));
-		try {
-			personService.save(personDTO);
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
+		assertThrows(InvalidGenericException.class, () -> personService.save(personDTO));
 	}
 
 	@Test
@@ -86,16 +78,12 @@ class PersonServiceTest extends PersonBase {
 		verify(genericRepository, times(0)).delete(personEntityPostSave);
 		personService.delete(1L);
 	}
-	
+
 	@Test
 	@DisplayName("Delete CRUD: Exception")
 	void deleteCatchTest() {
 		doThrow(new InvalidGenericException("")).when(genericRepository).deleteById(any());
-		try {
-			personService.delete(any());
-		} catch (Exception e) {
-			assertNotNull(e);
-		}
+		assertThrows(InvalidGenericException.class, () -> personService.delete(1L));
 	}
 
 	public PersonEntity personEdited() {

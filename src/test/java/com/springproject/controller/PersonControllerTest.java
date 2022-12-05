@@ -30,8 +30,8 @@ class PersonControllerTest extends PersonBase {
 	@Test
 	@DisplayName("Save default CRUD: Status OK")
 	void saveOkTest() {
-		ResponseEntity<PersonDTO> reuslt = personController.save(personDTO);
-		assertEquals(reuslt, new ResponseEntity<>(HttpStatus.OK));
+		ResponseEntity<PersonDTO> result = personController.save(personDTO);
+		assertEquals(result, new ResponseEntity<>(HttpStatus.OK));
 	}
 
 	@Test
