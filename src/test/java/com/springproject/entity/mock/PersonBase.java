@@ -2,8 +2,8 @@ package com.springproject.entity.mock;
 
 import java.time.LocalDateTime;
 
+import com.springproject.dataprovider.repository.entity.PersonEntity;
 import com.springproject.dto.PersonDTO;
-import com.springproject.entity.PersonEntity;
 
 public class PersonBase {
 	

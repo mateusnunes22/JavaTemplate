@@ -1,4 +1,4 @@
-package com.springproject.entity;
+package com.springproject.dataprovider.repository.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

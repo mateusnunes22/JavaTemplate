@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.springproject.dto.PersonDTO;
 import com.springproject.entity.mock.PersonBase;
+import com.springproject.entrypoint.controller.PersonController;
 import com.springproject.service.PersonService;
 
 @ExtendWith(MockitoExtension.class)

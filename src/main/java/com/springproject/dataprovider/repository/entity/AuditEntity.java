@@ -1,4 +1,4 @@
-package com.springproject.entity;
+package com.springproject.dataprovider.repository.entity;
 
 
 import java.time.LocalDateTime;

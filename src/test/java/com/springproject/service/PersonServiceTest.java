@@ -19,11 +19,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.springproject.dataprovider.repository.PersonRepository;
+import com.springproject.dataprovider.repository.entity.PersonEntity;
 import com.springproject.dto.PersonDTO;
-import com.springproject.entity.PersonEntity;
 import com.springproject.entity.mock.PersonBase;
 import com.springproject.exception.InvalidGenericException;
-import com.springproject.repository.GenericRepository;
 
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTest extends PersonBase {
@@ -32,12 +32,12 @@ class PersonServiceTest extends PersonBase {
 	public PersonServiceImpl personService;
 
 	@Mock
-	public GenericRepository<PersonEntity> genericRepository;
+	public PersonRepository personRepository;
 
 	@Test
 	@DisplayName("Find all CRUD: List empty")
 	void findAllTest() {
-		when(genericRepository.findAll()).thenReturn(new ArrayList<>());
+		when(personRepository.findAll()).thenReturn(new ArrayList<>());
 		List<PersonDTO> result = personService.findAll();
 		assertEquals(result, new ArrayList<>());
 	}
@@ -45,14 +45,14 @@ class PersonServiceTest extends PersonBase {
 	@Test
 	@DisplayName("Find all CRUD: Exception")
 	void findAllCatchTest() {
-		when(genericRepository.findAll()).thenThrow(new InvalidGenericException(""));
+		when(personRepository.findAll()).thenThrow(new InvalidGenericException(""));
 		assertThrows(InvalidGenericException.class, () -> personService.findAll());
 	}
 
 	@Test
 	@DisplayName("Save CRUD: Object empty")
 	void saveTest() {
-		when(genericRepository.save(any())).thenReturn(personEntityPostSave);
+		when(personRepository.save(any())).thenReturn(personEntityPostSave);
 		PersonDTO result = personService.save(personDTO);
 		assertNotNull(result);
 	}
@@ -67,7 +67,7 @@ class PersonServiceTest extends PersonBase {
 	@DisplayName("Edit Entity")
 	void editEntityTest() {
 		PersonEntity personEdited = personEdited();
-		when(genericRepository.save(any())).thenReturn(personEdited);
+		when(personRepository.save(any())).thenReturn(personEdited);
 		PersonDTO result = personService.save(personDTO);
 		assertNotNull(result);
 	}
@@ -75,14 +75,14 @@ class PersonServiceTest extends PersonBase {
 	@Test
 	@DisplayName("Delete CRUD: Void method")
 	void deleteTest() {
-		verify(genericRepository, times(0)).delete(personEntityPostSave);
+		verify(personRepository, times(0)).delete(personEntityPostSave);
 		personService.delete(1L);
 	}
 
 	@Test
 	@DisplayName("Delete CRUD: Exception")
 	void deleteCatchTest() {
-		doThrow(new InvalidGenericException("")).when(genericRepository).deleteById(any());
+		doThrow(new InvalidGenericException("")).when(personRepository).deleteById(any());
 		assertThrows(InvalidGenericException.class, () -> personService.delete(1L));
 	}
 
