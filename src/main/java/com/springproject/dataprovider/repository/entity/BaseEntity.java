@@ -1,9 +1,14 @@
 package com.springproject.dataprovider.repository.entity;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import com.springproject.core.type.ActiveEnum;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +16,18 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public class BaseEntity extends AuditEntity{
+public class BaseEntity extends AuditEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long id;
 
+	@Column(name = "NAME", nullable = false, length = 200)
 	private String name;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "IS_ACTIVE", nullable = false, length = 200)
+	private ActiveEnum isActive;
 
 }

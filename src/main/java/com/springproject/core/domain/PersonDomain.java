@@ -1,5 +1,7 @@
 package com.springproject.core.domain;
 
+import com.springproject.core.type.ActiveEnum;
+
 public class PersonDomain {
 	public PersonDomain() {
 	}
@@ -15,6 +17,8 @@ public class PersonDomain {
 	private String name;
 
 	private String email;
+
+	private ActiveEnum isActive;
 
 	public Long getId() {
 		return id;
@@ -38,6 +42,14 @@ public class PersonDomain {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public ActiveEnum getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(ActiveEnum isActive) {
+		this.isActive = isActive;
 	}
 
 }
