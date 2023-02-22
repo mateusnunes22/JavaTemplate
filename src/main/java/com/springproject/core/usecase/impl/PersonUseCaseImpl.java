@@ -8,7 +8,7 @@ import com.springproject.core.usecase.PersonUseCase;
 
 public class PersonUseCaseImpl implements PersonUseCase {
 
-	PersonDataProvider personDataProvider;
+	private PersonDataProvider personDataProvider;
 
 	public PersonUseCaseImpl(PersonDataProvider personDataProvider) {
 		this.personDataProvider = personDataProvider;

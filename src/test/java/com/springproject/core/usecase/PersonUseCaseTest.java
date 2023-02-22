@@ -1,9 +1,11 @@
-package com.springproject.service;
+package com.springproject.core.usecase;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -19,71 +21,86 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.springproject.dataprovider.repository.PersonRepository;
+import com.springproject.core.dataprovider.PersonDataProvider;
+import com.springproject.core.domain.PersonDomain;
+import com.springproject.core.usecase.impl.PersonUseCaseImpl;
 import com.springproject.dataprovider.repository.entity.PersonEntity;
-import com.springproject.dto.PersonDTO;
 import com.springproject.entity.mock.PersonBase;
 import com.springproject.exception.InvalidGenericException;
 
 @ExtendWith(MockitoExtension.class)
-class PersonServiceTest extends PersonBase {
+class PersonUseCaseTest extends PersonBase {
 
 	@InjectMocks
-	public PersonServiceImpl personService;
+	public PersonUseCaseImpl personUseCase;
 
 	@Mock
-	public PersonRepository personRepository;
+	public PersonDataProvider personDataProvider;
 
 	@Test
 	@DisplayName("Find all CRUD: List empty")
 	void findAllTest() {
-		when(personRepository.findAll()).thenReturn(new ArrayList<>());
-		List<PersonDTO> result = personService.findAll();
+		when(personDataProvider.findAll()).thenReturn(new ArrayList<>());
+		List<PersonDomain> result = personUseCase.findAll();
 		assertEquals(result, new ArrayList<>());
 	}
 
 	@Test
 	@DisplayName("Find all CRUD: Exception")
 	void findAllCatchTest() {
-		when(personRepository.findAll()).thenThrow(new InvalidGenericException(""));
-		assertThrows(InvalidGenericException.class, () -> personService.findAll());
+		when(personDataProvider.findAll()).thenThrow(new InvalidGenericException(""));
+		assertThrows(InvalidGenericException.class, () -> personUseCase.findAll());
 	}
 
 	@Test
 	@DisplayName("Save CRUD: Object empty")
 	void saveTest() {
-		when(personRepository.save(any())).thenReturn(personEntityPostSave);
-		PersonDTO result = personService.save(personDTO);
+		when(personDataProvider.save(any())).thenReturn("");
+		String result = personUseCase.save(personDomain);
 		assertNotNull(result);
 	}
 
 	@Test
 	@DisplayName("Save CRUD: Exception")
 	void saveCatchTest() {
-		assertThrows(InvalidGenericException.class, () -> personService.save(personDTO));
+		when(personDataProvider.save(any())).thenThrow(new InvalidGenericException(""));
+		assertThrows(InvalidGenericException.class, () -> personUseCase.save(personDomain));
 	}
 
 	@Test
 	@DisplayName("Edit Entity")
 	void editEntityTest() {
-		PersonEntity personEdited = personEdited();
-		when(personRepository.save(any())).thenReturn(personEdited);
-		PersonDTO result = personService.save(personDTO);
+		when(personDataProvider.save(any())).thenReturn("");
+		String result = personUseCase.save(personDomain);
 		assertNotNull(result);
 	}
 
 	@Test
 	@DisplayName("Delete CRUD: Void method")
 	void deleteTest() {
-		verify(personRepository, times(0)).delete(personEntityPostSave);
-		personService.delete(1L);
+		verify(personDataProvider, times(0)).delete(1L);
+		personUseCase.delete(1L);
 	}
 
 	@Test
 	@DisplayName("Delete CRUD: Exception")
 	void deleteCatchTest() {
-		doThrow(new InvalidGenericException("")).when(personRepository).deleteById(any());
-		assertThrows(InvalidGenericException.class, () -> personService.delete(1L));
+		doThrow(new InvalidGenericException("")).when(personDataProvider).delete(anyLong());
+		assertThrows(InvalidGenericException.class, () -> personUseCase.delete(1L));
+	}
+	
+	@Test
+	@DisplayName("Find by email")
+	void findByEmailTest() {
+		List<PersonDomain> result = personUseCase.findByEmail(personDomain.getEmail());
+		assertNotNull(result);
+	}
+
+	@Test
+	@DisplayName("Find by id")
+	void findByIdTest() {
+		PersonDomain result = personUseCase.findById(personDomain.getId());
+		assertNull(result);
 	}
 
 	public PersonEntity personEdited() {
