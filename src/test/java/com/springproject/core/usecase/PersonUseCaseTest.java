@@ -24,7 +24,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.springproject.core.dataprovider.PersonDataProvider;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.impl.PersonUseCaseImpl;
-import com.springproject.dataprovider.repository.entity.PersonEntity;
 import com.springproject.entity.mock.PersonBase;
 import com.springproject.exception.InvalidGenericException;
 
@@ -101,18 +100,6 @@ class PersonUseCaseTest extends PersonBase {
 	void findByIdTest() {
 		PersonDomain result = personUseCase.findById(personDomain.getId());
 		assertNull(result);
-	}
-
-	public PersonEntity personEdited() {
-		PersonEntity personEntityEdited = new PersonEntity();
-		personEntityEdited.setId(personEntityPostSave.getId());
-		personEntityEdited.setEmail(personEntityPostSave.getEmail());
-		personEntityEdited.setName(personEntityPostSave.getName());
-		personEntityEdited.setCreatedBy(personEntityPostSave.getCreatedBy());
-		personEntityEdited.setLastModifiedBy(personEntityPostSave.getLastModifiedBy());
-		personEntityEdited.setCreatedDate(personEntityPostSave.getCreatedDate());
-		personEntityEdited.setLastModifiedDate(personEntityPostSave.getLastModifiedDate());
-		return personEntityEdited;
 	}
 
 }
