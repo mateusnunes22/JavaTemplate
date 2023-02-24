@@ -1,18 +1,5 @@
 package com.springproject.entrypoint.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
 import com.springproject.entrypoint.controller.producer.SendPersonProducer;
@@ -20,6 +7,12 @@ import com.springproject.entrypoint.controller.producer.send.PersonMessageSend;
 import com.springproject.entrypoint.controller.request.PersonRequest;
 import com.springproject.entrypoint.controller.response.PersonResponse;
 import com.springproject.mapper.PersonMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/person")
@@ -50,8 +43,8 @@ public class PersonController {
 
 	@GetMapping
 	public ResponseEntity<List<PersonResponse>> findAll() {
-		List<PersonResponse> response = personUseCase.findAll().stream()
-				.map(element -> mapper.map(element, PersonResponse.class)).toList();
+		List<PersonDomain> personDomains = personUseCase.findAll();
+		List<PersonResponse> response = mapper.toResponseList(personDomains);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
