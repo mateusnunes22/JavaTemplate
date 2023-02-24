@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
+import com.springproject.entrypoint.controller.producer.SendPersonProducer;
+import com.springproject.entrypoint.controller.producer.send.PersonMessageSend;
 import com.springproject.entrypoint.controller.request.PersonRequest;
 import com.springproject.entrypoint.controller.response.PersonResponse;
 import com.springproject.mapper.PersonMapper;
@@ -27,6 +29,9 @@ public class PersonController {
 	private PersonUseCase personUseCase;
 
 	@Autowired
+	private SendPersonProducer sendPersonProducer;
+
+	@Autowired
 	private PersonMapper mapper;
 
 	@PostMapping
@@ -34,6 +39,13 @@ public class PersonController {
 		PersonDomain personDomain = mapper.map(personRequest, PersonDomain.class);
 		String response = personUseCase.save(personDomain);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
+	}
+
+	@PostMapping(value = "/kafka-producer")
+	public ResponseEntity<String> saveKafkaProducer(@RequestBody PersonRequest personRequest) {
+		PersonMessageSend personMessageSend = mapper.map(personRequest, PersonMessageSend.class);
+		sendPersonProducer.send(personMessageSend);
+		return new ResponseEntity<>("Added to queue", HttpStatus.CREATED);
 	}
 
 	@GetMapping
