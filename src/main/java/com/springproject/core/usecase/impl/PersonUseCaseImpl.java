@@ -2,7 +2,7 @@ package com.springproject.core.usecase.impl;
 
 import java.util.List;
 
-import com.springproject.core.dataprovider.PersonDataProvider;
+import com.springproject.core.domain.dataprovider.PersonDataProvider;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
 

@@ -21,7 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.springproject.core.dataprovider.PersonDataProvider;
+import com.springproject.core.domain.dataprovider.PersonDataProvider;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.impl.PersonUseCaseImpl;
 import com.springproject.entity.mock.PersonBase;

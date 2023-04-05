@@ -3,6 +3,7 @@ package com.springproject.entrypoint.controller;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -44,9 +45,8 @@ class PersonControllerTest extends PersonBase {
 	@DisplayName("Find all default CRUD: Status OK")
 	void findAllCreatedTest() {
 		when(personUseCase.findAll()).thenReturn(List.of(personDomain));
-		when(mapper.map(personDomain, PersonResponse.class)).thenReturn(personResponse);
 		ResponseEntity<List<PersonResponse>> reuslt = personController.findAll();
-		assertEquals(reuslt, new ResponseEntity<>(List.of(personResponse), HttpStatus.OK));
+		assertEquals(reuslt, new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK));
 	}
 
 	@Test

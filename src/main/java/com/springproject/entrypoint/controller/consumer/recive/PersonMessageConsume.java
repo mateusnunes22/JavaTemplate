@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonMessageRecive implements Serializable{
+public class PersonMessageConsume implements Serializable{
     /**
 	 * 
 	 */

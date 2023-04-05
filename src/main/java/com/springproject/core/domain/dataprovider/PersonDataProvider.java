@@ -1,4 +1,4 @@
-package com.springproject.core.dataprovider;
+package com.springproject.core.domain.dataprovider;
 
 import java.util.List;
 
