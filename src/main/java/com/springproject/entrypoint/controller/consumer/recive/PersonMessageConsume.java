@@ -2,7 +2,7 @@ package com.springproject.entrypoint.controller.consumer.recive;
 
 import java.io.Serializable;
 
-import com.springproject.core.type.ActiveEnum;
+import com.springproject.core.type.YesNoEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +23,6 @@ public class PersonMessageConsume implements Serializable{
 
     private String email;
     
-    private ActiveEnum isActive;
+    private YesNoEnum isActive;
 
 }

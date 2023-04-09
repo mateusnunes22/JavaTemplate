@@ -1,23 +1,30 @@
 package com.springproject.dataprovider.repository.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import com.springproject.core.type.ActiveEnum;
+import com.springproject.core.type.YesNoEnum;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@MappedSuperclass
+@Entity
+@Table(name = "Role")
 @Getter
 @Setter
-public class BaseEntity extends AuditEntity {
-
+public class RoleEntity extends AuditEntity{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -28,6 +35,9 @@ public class BaseEntity extends AuditEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "IS_ACTIVE", nullable = false, length = 200)
-	private ActiveEnum isActive;
+	private YesNoEnum isActive;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_role_id", referencedColumnName = "id")
+	private List<UserRoleEntity> userRole;
 }

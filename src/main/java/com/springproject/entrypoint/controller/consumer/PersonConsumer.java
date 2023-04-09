@@ -21,9 +21,6 @@ public class PersonConsumer {
 	@Autowired
 	private PersonMapper mapper;
 
-	public PersonConsumer() {
-	}
-
 	@KafkaListener(topics = "${spring.kafka.consumer.topics}", groupId = "${spring.kafka.consumer.group-id}")
 	public void consume(ConsumerRecord<?, ?> consumerRecord) {
 		try {

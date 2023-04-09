@@ -1,4 +1,4 @@
-package com.springproject.entrypoint.controller.request;
+package com.springproject.entrypoint.controller.request.auth;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class AuthenticationRequest {
-    private String email;
+    private String username;
     private String password;
 }

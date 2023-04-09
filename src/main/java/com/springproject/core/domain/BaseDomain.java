@@ -1,13 +1,13 @@
 package com.springproject.core.domain;
 
-import com.springproject.core.type.ActiveEnum;
+import com.springproject.core.type.YesNoEnum;
 
 public class BaseDomain {
 	private Long id;
 
 	private String name;
 
-	private ActiveEnum isActive;
+	private YesNoEnum isActive;
 
 	public Long getId() {
 		return id;
@@ -25,11 +25,11 @@ public class BaseDomain {
 		this.name = name;
 	}
 
-	public ActiveEnum getIsActive() {
+	public YesNoEnum getIsActive() {
 		return isActive;
 	}
 
-	public void setIsActive(ActiveEnum isActive) {
+	public void setIsActive(YesNoEnum isActive) {
 		this.isActive = isActive;
 	}
 }

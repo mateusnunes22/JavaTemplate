@@ -2,7 +2,7 @@ package com.springproject.entrypoint.controller.producer.send;
 
 import java.io.Serializable;
 
-import com.springproject.core.type.ActiveEnum;
+import com.springproject.core.type.YesNoEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +23,5 @@ public class PersonMessageSend implements Serializable{
 
 	private String email;
 
-	private ActiveEnum isActive;
+	private YesNoEnum isActive;
 }
