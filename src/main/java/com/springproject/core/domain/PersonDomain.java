@@ -1,12 +1,12 @@
 package com.springproject.core.domain;
 
-import com.springproject.core.type.ActiveEnum;
+import com.springproject.core.type.YesNoEnum;
 
 public class PersonDomain extends BaseDomain {
 	public PersonDomain() {
 	}
 
-	public PersonDomain(Long id, String name, ActiveEnum isActive, String email) {
+	public PersonDomain(Long id, String name, YesNoEnum isActive, String email) {
 		setId(id);
 		setName(name);
 		setIsActive(isActive);

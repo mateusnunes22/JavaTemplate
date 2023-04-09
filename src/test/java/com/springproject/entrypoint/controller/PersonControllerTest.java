@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
 import com.springproject.entity.mock.PersonBase;
-import com.springproject.entrypoint.controller.response.PersonResponse;
+import com.springproject.entrypoint.controller.response.person.PersonResponse;
 import com.springproject.mapper.PersonMapper;
 
 @ExtendWith(MockitoExtension.class)

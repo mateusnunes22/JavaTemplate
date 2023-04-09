@@ -1,7 +1,8 @@
 package com.springproject.mapper;
 
 import com.springproject.core.domain.PersonDomain;
-import com.springproject.entrypoint.controller.response.PersonResponse;
+import com.springproject.entrypoint.controller.response.person.PersonResponse;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
-package com.springproject.entrypoint.controller.request;
+package com.springproject.entrypoint.controller.request.person;
 
-import com.springproject.core.type.ActiveEnum;
+import com.springproject.core.type.YesNoEnum;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,5 +12,5 @@ public class PersonRequest {
 
 	private String email;
 
-	private ActiveEnum isActive;
+	private YesNoEnum isActive;
 }

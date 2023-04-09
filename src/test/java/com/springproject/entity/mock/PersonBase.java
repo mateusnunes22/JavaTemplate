@@ -1,12 +1,12 @@
 package com.springproject.entity.mock;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.springproject.core.domain.PersonDomain;
-import com.springproject.core.type.ActiveEnum;
+import com.springproject.core.type.YesNoEnum;
 import com.springproject.dataprovider.repository.entity.PersonEntity;
-import com.springproject.entrypoint.controller.request.PersonRequest;
-import com.springproject.entrypoint.controller.response.PersonResponse;
+import com.springproject.entrypoint.controller.request.person.PersonRequest;
+import com.springproject.entrypoint.controller.response.person.PersonResponse;
 
 public class PersonBase {
 
@@ -18,25 +18,25 @@ public class PersonBase {
 
 	public PersonEntity personEntityPostSave = new PersonEntity();
 
-	public PersonDomain personDomain = new PersonDomain(1L, "Person Name", ActiveEnum.YES, "email@test.com");
+	public PersonDomain personDomain = new PersonDomain(1L, "Person Name", YesNoEnum.YES, "email@test.com");
 
 	public PersonBase() {
 		personRequest.setName("Person Name");
 		personRequest.setEmail("email@test.com");
-		personRequest.setIsActive(ActiveEnum.YES);
+		personRequest.setIsActive(YesNoEnum.YES);
 
 		personResponse.setName("Person Name");
 		personResponse.setEmail("email@test.com");
-		personResponse.setIsActive(ActiveEnum.YES);
+		personResponse.setIsActive(YesNoEnum.YES);
 
 		personEntity.setId(1L);
 		personEntity.setEmail("email@test.com");
 		personEntity.setName("Person Name");
-		personEntity.setIsActive(ActiveEnum.YES);
-		personEntity.setCreatedBy(0L);
-		personEntity.setLastModifiedBy(0L);
-		personEntity.setCreatedDate(LocalDateTime.now());
-		personEntity.setLastModifiedDate(LocalDateTime.now());
+		personEntity.setIsActive(YesNoEnum.YES);
+		personEntity.setCreatedBy(1L);
+		personEntity.setLastModifiedBy(1L);
+		personEntity.setCreatedDate(new Date());
+		personEntity.setLastModifiedDate(new Date());
 
 		personEntityPostSave = new PersonEntity();
 		personEntityPostSave = personEntity;

@@ -11,24 +11,24 @@ import io.swagger.v3.oas.models.servers.Server;
 
 @SpringBootApplication
 public class DefaultJavaProjectApplication {
-	
+
 	@Value("${project.version}")
-    private String apiVersion;
+	private String apiVersion;
 
-    @Value("${project.description}")
-    private String apiTitle;
+	@Value("${project.description}")
+	private String apiTitle;
 
-    @Value("${server.servlet.contextPath}")
-    private String apiPath;
+	@Value("${server.servlet.contextPath}")
+	private String apiPath;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DefaultJavaProjectApplication.class, args);
 	}
-	
+
 	@Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI().info(new Info().title(apiTitle).version(apiVersion))
-                .addServersItem(new Server().url(apiPath));
-    }
+	public OpenAPI customOpenAPI() {
+		return new OpenAPI().info(new Info().title(apiTitle).version(apiVersion))
+				.addServersItem(new Server().url(apiPath));
+	}
 
 }
