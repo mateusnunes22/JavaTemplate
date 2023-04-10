@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.springproject.core.domain.UserDomain;
@@ -58,7 +60,7 @@ public class JwtUtils {
 	}
 
 	public Boolean isValidToken(String token, UserDomain userDomain) {
-		if (!userDomain.getLastUsedToken().equals(token))
+		if (!userDomain.getCurrentToken().equals(token))
 			throw new InvalidGenericException("Invalid token!");
 		final String username = extractUsername(token);
 		return (username.equals(userDomain.getUsername()) && !isTokenExpired(token));
@@ -66,5 +68,14 @@ public class JwtUtils {
 
 	private boolean isTokenExpired(String token) {
 		return extractExpiration(token).before(new Date());
+	}
+
+	public static UserDomain userLogged() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || !authentication.isAuthenticated()
+				|| authentication.getPrincipal().equals("anonymousUser")) {
+			return null;
+		}
+		return (UserDomain) authentication.getPrincipal();
 	}
 }

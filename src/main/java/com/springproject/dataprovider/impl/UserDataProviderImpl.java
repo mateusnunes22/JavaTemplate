@@ -1,5 +1,9 @@
 package com.springproject.dataprovider.impl;
 
+import javax.transaction.Transactional;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
+@Transactional
 public class UserDataProviderImpl implements UserDataProvider {
 
 	private final UserRepository userRepository;
@@ -45,7 +50,7 @@ public class UserDataProviderImpl implements UserDataProvider {
 	private void setRoleCreateAccount(Long userId) {
 		UserRoleEntity userRoleEntity = new UserRoleEntity();
 		userRoleEntity.setUserId(userId);
-		userRoleEntity.setRoleId(2L);
+		userRoleEntity.setRoleId(1L);
 		userRoleRepository.save(userRoleEntity);
 	}
 
@@ -57,9 +62,20 @@ public class UserDataProviderImpl implements UserDataProvider {
 	}
 
 	@Override
-	public void refreshToken(UserDomain userDomain) {
-		userDomain.setLastUsedToken(jwtUtils.generateToken(userDomain));
+	public UserDomain refreshToken(UserDomain userDomain) {
+		userDomain.setCurrentToken(jwtUtils.generateToken(userDomain));
+		UserEntity entity = userRepository.save(mapper.map(userDomain, UserEntity.class));
+		return mapper.map(entity, UserDomain.class);
+	}
+
+	@Override
+	public String invalidateSession() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDomain userDomain = (UserDomain) authentication.getPrincipal();
+		authentication.setAuthenticated(false);
+		userDomain.setCurrentToken(null);
 		userRepository.save(mapper.map(userDomain, UserEntity.class));
+		return "Session encerred";
 	}
 
 }

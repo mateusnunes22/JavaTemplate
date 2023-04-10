@@ -22,7 +22,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "USER_ACCOUNT")
+@Table(name = "ACCOUNT_USER")
 @Getter
 @Setter
 public class UserEntity extends AuditEntity {
@@ -42,8 +42,8 @@ public class UserEntity extends AuditEntity {
 	@Column(name = "PASSWORD", nullable = false, length = 200)
 	private String password;
 	
-	@Column(name = "LAST_USED_TOKEN", nullable = true, length = 200)
-	private String lastUsedToken;
+	@Column(name = "CURRENT_TOKEN", nullable = true, length = 200)
+	private String currentToken;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_user_id", referencedColumnName = "id")

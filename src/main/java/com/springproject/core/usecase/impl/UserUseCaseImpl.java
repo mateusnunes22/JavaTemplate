@@ -20,17 +20,22 @@ public class UserUseCaseImpl implements UserUseCase {
 	@Override
 	public String authenticate(String username) {
 		UserDomain userDomain = userDataProvider.authenticate(username);
-		return userDomain.getLastUsedToken();
+		return userDomain.getCurrentToken();
 	}
 
 	@Override
-	public void refreshToken(UserDomain userDomain) {
-		userDataProvider.refreshToken(userDomain);
+	public UserDomain refreshToken(UserDomain userDomain) {
+		return userDataProvider.refreshToken(userDomain);
 	}
 
 	@Override
 	public UserDomain createUser(UserDomain userDomain) {
 		return userDataProvider.createUser(userDomain);
+	}
+
+	@Override
+	public String invalidateSession() {
+		return userDataProvider.invalidateSession();
 	}
 
 }

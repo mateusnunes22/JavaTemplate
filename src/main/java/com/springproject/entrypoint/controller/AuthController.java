@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springproject.core.domain.UserDomain;
 import com.springproject.core.usecase.UserUseCase;
-import com.springproject.entrypoint.controller.request.auth.AuthenticationRequest;
-import com.springproject.entrypoint.controller.request.auth.CreateUserRequest;
-import com.springproject.entrypoint.controller.response.auth.UserResponse;
+import com.springproject.entrypoint.controller.request.AuthenticationRequest;
+import com.springproject.entrypoint.controller.request.CreateUserRequest;
+import com.springproject.entrypoint.controller.response.UserResponse;
+import com.springproject.entrypoint.controller.response.service.UserResponseService;
 import com.springproject.mapper.UserMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class AuthController {
 
 	private final AuthenticationManager authenticationManager;
 	private final UserUseCase userUseCase;
+	private final UserResponseService userResponseService;
 	private final UserMapper mapper;
 
 	@PostMapping(value = "/authenticate")
@@ -40,6 +42,12 @@ public class AuthController {
 	@PostMapping(value = "/create-user")
 	public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
 		UserDomain userDomain = userUseCase.createUser(mapper.map(request, UserDomain.class));
-		return ResponseEntity.ok(mapper.map(userDomain, UserResponse.class));
+		UserResponse userResponse = userResponseService.createUser(userDomain);
+		return ResponseEntity.ok(userResponse);
+	}
+
+	@PostMapping(value = "invalidate-session")
+	public ResponseEntity<String> invalidateSession() {
+		return ResponseEntity.ok(userUseCase.invalidateSession());
 	}
 }

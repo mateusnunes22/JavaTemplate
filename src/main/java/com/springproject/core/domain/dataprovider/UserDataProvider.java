@@ -8,8 +8,10 @@ public interface UserDataProvider {
 	
 	UserDomain authenticate(String username);
 	
-	void refreshToken(UserDomain userDomain);
+	UserDomain refreshToken(UserDomain userDomain);
 
 	UserDomain createUser(UserDomain map);
+
+	String invalidateSession();
 
 }

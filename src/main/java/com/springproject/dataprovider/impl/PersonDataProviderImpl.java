@@ -2,17 +2,20 @@ package com.springproject.dataprovider.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.springproject.core.domain.dataprovider.PersonDataProvider;
 import com.springproject.core.domain.PersonDomain;
+import com.springproject.core.domain.dataprovider.PersonDataProvider;
 import com.springproject.dataprovider.repository.PersonRepository;
 import com.springproject.dataprovider.repository.entity.PersonEntity;
 import com.springproject.exception.InvalidGenericException;
 import com.springproject.mapper.PersonMapper;
 
 @Component
+@Transactional
 public class PersonDataProviderImpl implements PersonDataProvider {
 
 	@Autowired
