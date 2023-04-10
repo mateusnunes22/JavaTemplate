@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
 import com.springproject.entity.mock.PersonBase;
+import com.springproject.entrypoint.controller.response.BaseResponse;
 import com.springproject.entrypoint.controller.response.PersonResponse;
 import com.springproject.mapper.PersonMapper;
 
@@ -37,7 +38,7 @@ class PersonControllerTest extends PersonBase {
 	@DisplayName("Save default CRUD: Status OK")
 	void saveOkTest() {
 		when(mapper.map(personRequest, PersonDomain.class)).thenReturn(personDomain);
-		ResponseEntity<String> result = personController.save(personRequest);
+		ResponseEntity<BaseResponse> result = personController.save(personRequest);
 		assertEquals(result, new ResponseEntity<>(HttpStatus.CREATED));
 	}
 
@@ -59,7 +60,7 @@ class PersonControllerTest extends PersonBase {
 	@Test
 	@DisplayName("Delete default CRUD: Status OK")
 	void deleteOkTest() {
-		ResponseEntity<String> reuslt = personController.delete(personEntity.getId());
+		ResponseEntity<BaseResponse> reuslt = personController.delete(personEntity.getId());
 		assertEquals(reuslt, new ResponseEntity<>(null, HttpStatus.OK));
 	}
 
