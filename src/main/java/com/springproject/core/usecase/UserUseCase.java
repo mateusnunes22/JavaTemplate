@@ -7,7 +7,9 @@ public interface UserUseCase {
 	
 	String authenticate(String username);
 	
-	void refreshToken(UserDomain userDomain);
+	UserDomain refreshToken(UserDomain userDomain);
+	
+	String invalidateSession();
 
 	UserDomain createUser(UserDomain userDomain);
 }

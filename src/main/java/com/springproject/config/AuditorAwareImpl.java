@@ -4,11 +4,18 @@ import java.util.Optional;
 
 import org.springframework.data.domain.AuditorAware;
 
-public class AuditorAwareImpl implements AuditorAware<String> {
+import com.springproject.core.domain.UserDomain;
+import com.springproject.util.JwtUtils;
 
-	@Override
-	public Optional<String> getCurrentAuditor() {
-		return Optional.empty();
-	}
+public class AuditorAwareImpl implements AuditorAware<Long> {
+
+    @Override
+    public Optional<Long> getCurrentAuditor() {
+        UserDomain userDomain = JwtUtils.userLogged();
+        if (userDomain != null)
+            return Optional.of(userDomain.getId());
+        else
+            return Optional.empty();
+    }
 
 }

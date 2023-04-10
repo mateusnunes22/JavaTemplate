@@ -1,4 +1,4 @@
-package com.springproject.entrypoint.controller.request.auth;
+package com.springproject.entrypoint.controller.request;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,11 +1,14 @@
 package com.springproject.dataprovider;
 
-import com.springproject.core.domain.PersonDomain;
-import com.springproject.dataprovider.impl.PersonDataProviderImpl;
-import com.springproject.dataprovider.repository.PersonRepository;
-import com.springproject.dataprovider.repository.entity.PersonEntity;
-import com.springproject.entity.mock.PersonBase;
-import com.springproject.mapper.PersonMapper;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,12 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
+import com.springproject.core.domain.PersonDomain;
+import com.springproject.dataprovider.impl.PersonDataProviderImpl;
+import com.springproject.dataprovider.repository.PersonRepository;
+import com.springproject.dataprovider.repository.entity.PersonEntity;
+import com.springproject.entity.mock.PersonBase;
+import com.springproject.mapper.PersonMapper;
 
 @ExtendWith(MockitoExtension.class)
 class PersonDataProviderTest extends PersonBase {
@@ -37,7 +40,7 @@ class PersonDataProviderTest extends PersonBase {
 	void findByEmailTest() {
 		when(personRepository.findByEmail(anyString())).thenReturn(List.of(personEntity));
 		when(mapper.toDomainList(anyList())).thenReturn(List.of(personDomain));
-		List<PersonDomain> result = personDataProvider.findByEmail(personResponse.getEmail());
+		List<PersonDomain> result = personDataProvider.findByEmail("");
 		assertNotNull(result);
 	}
 	

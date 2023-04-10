@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.springproject.core.domain.UserDomain;
 import com.springproject.core.type.RoleEnum;
 import com.springproject.dataprovider.repository.entity.UserRoleEntity;
-import com.springproject.entrypoint.controller.response.auth.UserResponse;
+import com.springproject.entrypoint.controller.response.UserResponse;
 
 @Component
 public class UserMapper extends ModelMapper {

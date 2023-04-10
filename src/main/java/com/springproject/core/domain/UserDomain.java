@@ -11,14 +11,14 @@ public class UserDomain extends BaseDomain {
 	}
 
 	public UserDomain(Long id, String name, YesNoEnum isActive, String username, String password,
-			List<String> authorities, String lastUsedToken) {
+			List<String> authorities, String currentToken) {
 		setId(id);
 		setName(name);
 		setIsActive(isActive);
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
-		this.lastUsedToken = lastUsedToken;
+		this.currentToken = currentToken;
 	}
 
 	private String username;
@@ -27,7 +27,7 @@ public class UserDomain extends BaseDomain {
 
 	private List<String> authorities = new ArrayList<>();
 
-	private String lastUsedToken;
+	private String currentToken;
 
 	public String getUsername() {
 		return username;
@@ -53,11 +53,11 @@ public class UserDomain extends BaseDomain {
 		this.authorities = authorities;
 	}
 
-	public String getLastUsedToken() {
-		return lastUsedToken;
+	public String getCurrentToken() {
+		return currentToken;
 	}
 
-	public void setLastUsedToken(String lastUsedToken) {
-		this.lastUsedToken = lastUsedToken;
+	public void setCurrentToken(String currentToken) {
+		this.currentToken = currentToken;
 	}
 }

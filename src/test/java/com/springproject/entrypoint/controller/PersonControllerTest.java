@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
 import com.springproject.entity.mock.PersonBase;
-import com.springproject.entrypoint.controller.response.person.PersonResponse;
+import com.springproject.entrypoint.controller.response.PersonResponse;
 import com.springproject.mapper.PersonMapper;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,7 +45,7 @@ class PersonControllerTest extends PersonBase {
 	@DisplayName("Find all default CRUD: Status OK")
 	void findAllCreatedTest() {
 		when(personUseCase.findAll()).thenReturn(List.of(personDomain));
-		ResponseEntity<List<PersonResponse>> reuslt = personController.findAll();
+		ResponseEntity<PersonResponse> reuslt = personController.findAll();
 		assertEquals(reuslt, new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK));
 	}
 
