@@ -25,7 +25,7 @@ public class PersonResponseServiceImpl implements PersonResponseService {
 	public PersonResponse findAll(List<PersonDomain> personDomains) {
 		PersonResponse personResponse = new PersonResponse();
 		personResponse.setPersonDtoList(mapper.toDtoList(personDomains));
-		baseResponseService.addBaseResponse(personResponse, "");
+		baseResponseService.addBaseResponse(personResponse, null);
 		return personResponse;
 	}
 
@@ -33,7 +33,7 @@ public class PersonResponseServiceImpl implements PersonResponseService {
 	public PersonResponse findById(PersonDomain personDomain) {
 		PersonResponse personResponse = new PersonResponse();
 		personResponse.setPersonDto(mapper.map(personDomain, PersonDto.class));
-		baseResponseService.addBaseResponse(personResponse, "");
+		baseResponseService.addBaseResponse(personResponse, null);
 		return personResponse;
 	}
 

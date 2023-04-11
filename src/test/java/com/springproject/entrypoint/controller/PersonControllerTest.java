@@ -3,7 +3,6 @@ package com.springproject.entrypoint.controller;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +17,10 @@ import org.springframework.http.ResponseEntity;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
 import com.springproject.entity.mock.PersonBase;
+import com.springproject.entrypoint.controller.response.BaseResponse;
 import com.springproject.entrypoint.controller.response.PersonResponse;
+import com.springproject.entrypoint.controller.response.service.BaseResponseService;
+import com.springproject.entrypoint.controller.response.service.PersonResponseService;
 import com.springproject.mapper.PersonMapper;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,21 +34,36 @@ class PersonControllerTest extends PersonBase {
 
 	@Mock
 	public PersonMapper mapper;
-
+	
+	@Mock
+	public BaseResponseService baseResponseService;
+	
+	@Mock
+	public PersonResponseService personResponseService;
+	
 	@Test
 	@DisplayName("Save default CRUD: Status OK")
-	void saveOkTest() {
+	 void savePersonSuccessTest() {
+		String message = "Person saved successfully";
+		BaseResponse response = new BaseResponse();
+		response.setMessage(message);
 		when(mapper.map(personRequest, PersonDomain.class)).thenReturn(personDomain);
-		ResponseEntity<String> result = personController.save(personRequest);
-		assertEquals(result, new ResponseEntity<>(HttpStatus.CREATED));
+		when(personUseCase.save(personDomain)).thenReturn(message);
+		when(baseResponseService.addBaseResponse(message)).thenReturn(response);
+		
+		ResponseEntity<BaseResponse> result = personController.save(personRequest);
+		
+		assertEquals(HttpStatus.CREATED, result.getStatusCode());
+		assertEquals(response, result.getBody());
 	}
 
 	@Test
 	@DisplayName("Find all default CRUD: Status OK")
 	void findAllCreatedTest() {
 		when(personUseCase.findAll()).thenReturn(List.of(personDomain));
-		ResponseEntity<PersonResponse> reuslt = personController.findAll();
-		assertEquals(reuslt, new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK));
+		when(personResponseService.findAll(List.of(personDomain))).thenReturn(personResponse);
+		ResponseEntity<PersonResponse> result = personController.findAll();
+		assertEquals(HttpStatus.OK, result.getStatusCode());
 	}
 
 	@Test
@@ -59,7 +76,7 @@ class PersonControllerTest extends PersonBase {
 	@Test
 	@DisplayName("Delete default CRUD: Status OK")
 	void deleteOkTest() {
-		ResponseEntity<String> reuslt = personController.delete(personEntity.getId());
+		ResponseEntity<BaseResponse> reuslt = personController.delete(personEntity.getId());
 		assertEquals(reuslt, new ResponseEntity<>(null, HttpStatus.OK));
 	}
 
