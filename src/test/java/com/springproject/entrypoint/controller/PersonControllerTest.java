@@ -1,5 +1,6 @@
 package com.springproject.entrypoint.controller;
 
+
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
 import com.springproject.entity.mock.PersonBase;
@@ -18,9 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
-
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -43,7 +42,7 @@ class PersonControllerTest extends PersonBase {
 	
 	@Mock
 	public PersonResponseService personResponseService;
-
+  
 	@Mock
 	public SendPersonProducer sendPersonProducer;
 
