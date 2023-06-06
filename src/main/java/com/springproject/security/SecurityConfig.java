@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -59,10 +59,9 @@ public class SecurityConfig {
 		return config.getAuthenticationManager();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
+		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
@@ -83,8 +82,8 @@ public class SecurityConfig {
 
 	private List<GrantedAuthority> getAuthorities(UserDomain userDomain) {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		for (String authorite : userDomain.getAuthorities()) {
-			authorities.add(new SimpleGrantedAuthority(authorite));
+		for (String authority : userDomain.getAuthorities()) {
+			authorities.add(new SimpleGrantedAuthority(authority));
 		}
 		return authorities;
 	}

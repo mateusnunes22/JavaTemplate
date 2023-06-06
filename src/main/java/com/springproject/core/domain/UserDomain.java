@@ -5,8 +5,7 @@ import java.util.List;
 
 import com.springproject.core.type.YesNoEnum;
 
-public class UserDomain extends BaseDomain {
-
+public class UserDomain extends BaseDomain{
 	public UserDomain() {
 	}
 

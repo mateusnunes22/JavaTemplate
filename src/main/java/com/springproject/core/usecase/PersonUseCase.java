@@ -5,13 +5,13 @@ import java.util.List;
 import com.springproject.core.domain.PersonDomain;
 
 public interface PersonUseCase {
-	List<PersonDomain> findByEmail(String email);
+	PersonDomain findByEmail(String email);
 	
 	List<PersonDomain> findAll();
 	
-	String save(PersonDomain personDomain);
+	void save(PersonDomain personDomain);
 	
-	String delete(Long id);
+	void delete(Long id);
 
 	PersonDomain findById(Long id);
 }

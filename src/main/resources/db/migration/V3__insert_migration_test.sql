@@ -1,0 +1,1 @@
+insert into migration_test (id, name) values (1, 'teste');

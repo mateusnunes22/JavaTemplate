@@ -6,10 +6,15 @@ import java.util.Date;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.type.YesNoEnum;
 import com.springproject.dataprovider.repository.entity.PersonEntity;
+import com.springproject.entrypoint.controller.consumer.recive.PersonMessageConsume;
+import com.springproject.entrypoint.controller.dto.PersonDto;
+import com.springproject.entrypoint.controller.producer.send.PersonMessageSend;
 import com.springproject.entrypoint.controller.request.PersonRequest;
 import com.springproject.entrypoint.controller.response.PersonResponse;
 
 public class PersonBase {
+
+	public PersonDomain personDomain = new PersonDomain(1L, "Person Name", YesNoEnum.YES, "email@test.com");
 
 	public PersonRequest personRequest = new PersonRequest();
 
@@ -19,12 +24,16 @@ public class PersonBase {
 
 	public PersonEntity personEntityPostSave = new PersonEntity();
 
-	public PersonDomain personDomain = new PersonDomain(1L, "Person Name", YesNoEnum.YES, "email@test.com");
+	public PersonMessageConsume personMessageConsume = new PersonMessageConsume(1L,"levva","a.levva@.com",YesNoEnum.YES);
 
+	public PersonMessageSend personMessageSend = new PersonMessageSend(1L, "a@levva.com", "levva", YesNoEnum.YES);
+
+
+	public PersonDto personDto = new PersonDto();
 	public PersonBase() {
-		personRequest.setName("Person Name");
+		personRequest.setName(personDomain.getName());
 		personRequest.setEmail("email@test.com");
-		personRequest.setIsActive(YesNoEnum.YES);
+		personRequest.setIsActive(personDomain.getIsActive());
 
 		personResponse.setPersonDtoList(new ArrayList<>());
 
@@ -41,6 +50,19 @@ public class PersonBase {
 		personEntityPostSave = personEntity;
 		personEntityPostSave.setId(1L);
 
+		personMessageConsume.setId(1L);
+		personMessageConsume.setEmail("a@levva.com");
+		personMessageConsume.setIsActive(YesNoEnum.YES);
+		personMessageConsume.setName("levva");
+		
+		personMessageSend.setId(1L);
+		personMessageSend.setEmail("a@levva.com");
+		personMessageSend.setIsActive(YesNoEnum.YES);
+		personMessageSend.setName("levva");
+
+		personDto.setEmail("a@levva.com");
+		personDto.setName("levva");
+		personDto.setIsActive(YesNoEnum.YES);
 	}
 
 }
