@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -41,7 +42,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 		}
 		final String jwtToken = authHeader.substring(7);
 		final String username = jwtUtils.extractUsername(jwtToken);
-		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+		final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (username != null && (authentication == null || authentication.getPrincipal() == null)) {
 			UserDomain userDomain = userUseCase.findByUsername(username);
 			final boolean isTokenValid = jwtUtils.isValidToken(jwtToken, userDomain);
 			if (isTokenValid) {

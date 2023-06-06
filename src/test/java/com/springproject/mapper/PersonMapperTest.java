@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
+import com.springproject.entrypoint.controller.dto.PersonDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,5 +31,12 @@ class PersonMapperTest extends PersonBase {
 		List<PersonDomain> personDomains = mapper.toDomainList(List.of(personEntity));
 		assertNotNull(personDomains);
 	}
-	
+
+	@Test
+	@DisplayName(value = "Convert to Person DTO")
+	void toDtoListTest() {
+		List<PersonDto> dtoList = mapper.toDtoList(List.of(personEntity));
+		assertNotNull(dtoList);
+	}
+
 }

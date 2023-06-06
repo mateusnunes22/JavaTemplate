@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class UserResponseImpl implements UserResponseService {
+public class UserResponseServiceImpl implements UserResponseService {
 
 	private final UserMapper mapper;
 

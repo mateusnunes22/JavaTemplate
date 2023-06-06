@@ -9,7 +9,7 @@ public interface UserUseCase {
 	
 	UserDomain refreshToken(UserDomain userDomain);
 	
-	String invalidateSession();
+	void invalidateSession();
 
 	UserDomain createUser(UserDomain userDomain);
 }

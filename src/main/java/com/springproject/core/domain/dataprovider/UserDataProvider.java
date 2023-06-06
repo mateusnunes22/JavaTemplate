@@ -12,6 +12,6 @@ public interface UserDataProvider {
 
 	UserDomain createUser(UserDomain map);
 
-	String invalidateSession();
+	void invalidateSession();
 
 }

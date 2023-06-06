@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springproject.core.domain.PersonDomain;
 import com.springproject.core.usecase.PersonUseCase;
 import com.springproject.entrypoint.controller.consumer.recive.PersonMessageConsume;
-import com.springproject.exception.InvalidGenericException;
 import com.springproject.mapper.PersonMapper;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.KafkaException;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +28,7 @@ public class PersonConsumer {
 					PersonMessageConsume.class);
 			personUseCase.save(mapper.map(personMessageConsume, PersonDomain.class));
 		} catch (JsonProcessingException e) {
-			throw new InvalidGenericException(e.getMessage());
+			throw new KafkaException(e.getMessage());
 		}
 	}
 }

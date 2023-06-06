@@ -82,8 +82,8 @@ public class SecurityConfig {
 
 	private List<GrantedAuthority> getAuthorities(UserDomain userDomain) {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		for (String authorite : userDomain.getAuthorities()) {
-			authorities.add(new SimpleGrantedAuthority(authorite));
+		for (String authority : userDomain.getAuthorities()) {
+			authorities.add(new SimpleGrantedAuthority(authority));
 		}
 		return authorities;
 	}

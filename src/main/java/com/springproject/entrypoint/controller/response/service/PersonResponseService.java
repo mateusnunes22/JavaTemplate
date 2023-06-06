@@ -6,7 +6,7 @@ import com.springproject.core.domain.PersonDomain;
 import com.springproject.entrypoint.controller.response.PersonResponse;
 
 public interface PersonResponseService {
-	PersonResponse findAll(List<PersonDomain> personDomains);
+	PersonResponse getAll(List<PersonDomain> personDomains);
 
-	PersonResponse findById(PersonDomain personDomain);
+	PersonResponse getOne(PersonDomain personDomain);
 }
